@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +66,8 @@ public class UserEditController {
 	 * @throws Exception 
 	 */
 	@GetMapping(UrlConst.USER_EDIT)
-	public String view(Model model, UserEditForm form) throws Exception {
+//	public String view(Model model, UserEditForm form) throws Exception {
+	public String view(Model model) throws Exception {
 		var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
 		var userInfoOpt = service.searchUserInfo(loginId);
 		if (userInfoOpt.isEmpty()) {
@@ -74,8 +75,22 @@ public class UserEditController {
 					AppUtil.getMessage(messageSource, MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
 			return ViewNameConst.USER_EDIT_ERROR;
 		}
+		
 		var userInfo = userInfoOpt.get();
-		model.addAttribute("userEditForm", mapper.map(userInfo, UserEditForm.class));
+		boolean isFormDataSet = false; // DBから取得したユーザ情報でformをセットするか(True：yes)
+		if (!model.containsAttribute(ModelKey.IS_ERROR)) {
+			// IS_ERRORの判定値がなければ初回表示
+			isFormDataSet = true;
+		} else {
+			if (!(boolean)model.getAttribute(ModelKey.IS_ERROR)) {
+				// IS_ERRORがFALSEであれば登録成功
+				isFormDataSet = true;
+			}
+		}
+		
+		if (isFormDataSet) {
+			model.addAttribute("userEditForm", mapper.map(userInfo, UserEditForm.class));
+		}
 		model.addAttribute("userEditInfo", mapper.map(userInfo, UserEditInfo.class));
 		model.addAttribute("userStatusKindOptions", UserStatusKind.values());
 		model.addAttribute("authorityKindOptions", AuthorityKind.values());
@@ -108,11 +123,10 @@ public class UserEditController {
 		if (bdResult.hasErrors()) {
 			editGuideMessage(form, bdResult, MessageConst.FORM_ERROR, redirectAttributes);
 			return AppUtil.doRedirect(UrlConst.USER_EDIT);
-//			return ViewNameConst.USER_EDIT;
 		}
 		var updateDto = mapper.map(form, UserUpdateInfo.class);
 		updateDto.setLoginId((String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
-		updateDto.setUpdateUserId(user.getUsername());
+		updateDto.setUpdateUserId("test");
 
 		var updateResult = service.updateUserInfo(updateDto);
 		var updateMessage = updateResult.getUpdateMessage();

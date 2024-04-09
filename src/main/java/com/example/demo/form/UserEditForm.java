@@ -1,10 +1,12 @@
 package com.example.demo.form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
 import com.example.demo.constant.db.AuthorityKind;
 import com.example.demo.constant.db.UserStatusKind;
 
+import jakarta.validation.constraints.AssertTrue;
 import lombok.Data;
 
 /**
@@ -26,10 +28,22 @@ public class UserEditForm {
 	private AuthorityKind authorityKind;
 	
 	/** パスワード */
-	@Length(min = 3, max = 20, message = "aaaaa")
+	@Length(min = 3, max = 20)
 	private String password;
 	
-//	/** パスワード(確認) */
-//	private String passwordConfirm;
+	/** パスワード(確認) */
+	private String passwordConfirm;
+	
+	/**
+	 * パスワード(確認)との整合チェック
+	 * @return 判定結果(パスワード(確認)と一致・true、不一致：false
+	 */
+	@AssertTrue(message="パスワード(確認)と一致していません")
+	public boolean isPasswordCheck() {
+		if (StringUtils.defaultString(getPassword()).equals(getPasswordConfirm())) {
+			return true;
+		}
+		return false;
+	}
 
 }

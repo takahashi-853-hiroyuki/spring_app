@@ -71,7 +71,7 @@
 						</select>
 					</td>
 				</tr>
-			</table>	
+			</table>
 			<hr>
 			<h5>パスワード変更（変更しない場合は入力不要）</h5>
 			<table>	
@@ -81,12 +81,12 @@
 						<div class="row g-3 align-items-center">
 							<div class="col-auto">
 								<input type="password" class="form-control" th:field="*{password}">									
-								<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-							</div>
+								<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>								
+								<div class="text-danger" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}"></div>
 						</div>
 					</td>
 				</tr>
-<!--				<tr>
+				<tr>
 					<td><label for="passwordConfirm">パスワード(確認)：</label></td>
 					<td>
 						<div class="row g-3 align-items-center">
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 					</td>
-				</tr>-->
+				</tr>
 			</table>
 			<div class="mt-3">
 				<input type="submit" class="btn btn-primary" name="update" value="更新">
@@ -103,7 +103,5 @@
 			</div>
 		</div>
 	</form>	
-	<div class="text-danger">aaaaaa</div>	
-	<div class="text-danger" th:if="${#fields.hasErrors('${userEditForm}')}">bbbbb</div>
 </div>
 </html>
