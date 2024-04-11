@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +66,6 @@ public class UserEditController {
 	 * @throws Exception 
 	 */
 	@GetMapping(UrlConst.USER_EDIT)
-//	public String view(Model model, UserEditForm form) throws Exception {
 	public String view(Model model) throws Exception {
 		var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
 		var userInfoOpt = service.searchUserInfo(loginId);
@@ -126,7 +125,7 @@ public class UserEditController {
 		}
 		var updateDto = mapper.map(form, UserUpdateInfo.class);
 		updateDto.setLoginId((String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
-		updateDto.setUpdateUserId("test");
+		updateDto.setUpdateUserId(user.getUsername());
 
 		var updateResult = service.updateUserInfo(updateDto);
 		var updateMessage = updateResult.getUpdateMessage();
