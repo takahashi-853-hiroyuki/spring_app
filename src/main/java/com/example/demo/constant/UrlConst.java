@@ -29,6 +29,12 @@ public class UrlConst {
 	/** ユーザー編集画面 */
 	public static final String USER_EDIT = "/userEdit";
 
+	/** 商品一覧画面 */
+	public static final String PRODUCT_LIST = "/productList";
+
+	/** 商品登録画面 */
+	public static final String PRODUCT_ENTRY = "/productEntry";
+
 	/** 認証不要画面 */
 	public static final String[] NO_AUTHENTICATION = { LOGIN, SIGNUP, SIGNUP_CONFIRM, SIGNUP_COMPLETION,
 			"/webjars/**", "/css/**" };

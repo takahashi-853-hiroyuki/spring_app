@@ -67,4 +67,23 @@ public class MessageConst {
 
 	/** ユーザー情報編集画面：ユーザー更新完了 */
 	public static final String USEREDIT_UPDATE_SUCCEED = "userEdit.updateSucceed";
+	
+	
+
+
+	/** 商品一覧画面：存在しない品番 */
+	public static final String PRODUCTLIST_NON_EXISTED_LOGIN_ID = "productList.nonExistedProductNo";
+
+	/** 商品一覧画面：商品削除完了 */
+	public static final String PRODUCTLIST_DELETE_SUCCEED = "productList.deleteSucceed";
+
+	/** 商品情報編集画面：存在しない品番 */
+	public static final String PRODUCTEDIT_NON_EXISTED_LOGIN_ID = "productEdit.nonExistedLoginId";
+
+	/** 商品情報編集画面：商品更新失敗 */
+	public static final String PRODUCTEDIT_UPDATE_FAILED = "productEdit.updateFailed";
+
+	/** 商品情報編集画面：商品更新完了 */
+	public static final String PRODUCTEDIT_UPDATE_SUCCEED = "productEdit.updateSucceed";
+	
 }

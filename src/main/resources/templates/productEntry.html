@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品編集画面</title>
+</head>
+<body>
+<div th:insert="~{common/sourceList :: sourceList}"></div>
+<div th:replace="~{common/header :: header}"></div>
+<script type="text/javascript" th:src="@{/js/userEdit.js}"></script>
+<div class="container-fluid">
+	<div class="alert d-flex align-items-center alert-danger" role="alert">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
+			<use xlink:href="#exclamation-triangle-fill"></use>
+		</svg>
+		<span>項目チェックエラーがあります。入力内容を修正してください。</span>
+	</div>
+	<div th:insert="~{common/guideMessage :: guideMessage}"></div>
+	<h2 class="mt-3">商品登録</h2>
+<!--	<h5 class="text-danger" >新規登録</h5>	-->
+	<h5 class="text-danger" >編集</h5>
+<!--	<form th:action="@{/userEdit}" method="post" th:object="${userEditForm}">-->
+		<div class="mt-3">
+			<table>
+				<tr>
+					<td><label for="productNo">品番</label></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="text" class="form-control" id="productNo">
+							</div>							
+							<div class="col-auto">
+								<span class="form-text">半角英数字5文字以内</span>
+							</div>
+						</div>
+						<div class="text-danger">半角英数字で入力をしてください。</div>
+						<div class="text-danger">1桁～20桁の間で入力をしてください。</div>
+					</td>
+				</tr>		
+				<tr>
+					<td><label for="productName">品名</label></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="text" class="form-control" id="productName">
+							</div>							
+							<div class="col-auto">
+								<span class="form-text">20文字以内</span>
+							</div>
+						</div>
+						<div class="text-danger">1桁～20桁の間で入力をしてください。</div>
+					</td>
+				</tr>			
+				<tr>
+					<td><label for="color">カラー</label></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="text" class="form-control" id="color">
+							</div>							
+							<div class="col-auto">
+								<span class="form-text">10文字以内</span>
+							</div>
+						</div>									
+						<div class="text-danger">0桁～10桁の間で入力をしてください。</div>
+					</td>
+				</tr>		
+				<tr>
+					<td><label for="price">価格</label></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="number" class="form-control" id="price">
+							</div>							
+							<div class="col-auto">
+								<span class="form-text">9桁以内</span>
+							</div>
+						</div>						
+						<div class="text-danger">半角数字で入力をしてください。</div>
+						<div class="text-danger">1桁～9桁の間で入力をしてください。</div>
+					</td>
+				</tr>
+				<tr>
+					<td><label for="releaseDate">発売日</label></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="date" class="form-control" id="releaseDate">
+							</div>							
+							<div class="col-auto">
+								<span class="form-text">
+							</div>
+						</div>						
+						<div class="text-danger">10桁で入力をしてください。</div>
+					</td>
+				</tr>
+			</table>
+			<div class="mt-3">
+				<input type="submit" class="btn btn-primary" name="update" value="登録">
+				<a class="btn btn-secondary" th:href="@{/userList}">戻る</a>
+			</div>
+		</div>
+<!--	</form>	-->
+</div>
+</html>

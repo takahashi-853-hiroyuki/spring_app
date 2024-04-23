@@ -32,4 +32,10 @@ public class ViewNameConst {
 	/** ユーザー編集画面_エラー時 */
 	public static final String USER_EDIT_ERROR = "userEditError";
 
+	/** 商品一覧画面 */
+	public static final String PRODUCT_LIST = "productList";
+
+	/** 商品登録画面 */
+	public static final String PRODUCT_ENTRY = "productEntry";
+
 }
